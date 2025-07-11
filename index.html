@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banisethi Bhoomika - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #ecf0f1;
+            background: linear-gradient(45deg, #3498db, #8e44ad, #e74c3c, #2c3e50);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            background: linear-gradient(45deg, #ff6f61, #40c4ff, #ab47bc, #26a69a);
+            color: #1a2a44;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .navbar {
+            background-color: rgba(44, 62, 80, 0.9);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar.light-theme {
+            background-color: rgba(255, 235, 238, 0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .navbar.light-theme a {
+            color: #1a2a44;
+        }
+
+        .navbar a:hover {
+            color: #3498db;
+            text-shadow: 0 0 10px #3498db, 0 0 20px #3498db;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 2rem;
+        }
+
+        .theme-toggle i {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .navbar.light-theme .theme-toggle i {
+            color: #d32f2f;
+        }
+
+        .theme-toggle .sun-icon {
+            display: none;
+        }
+
+        .theme-toggle .moon-icon {
+            display: inline;
+        }
+
+        .light-theme .theme-toggle .sun-icon {
+            display: inline;
+        }
+
+        .light-theme .theme-toggle .moon-icon {
+            display: none;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero, .education, .experience, .skills, .certificates {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .light-theme .hero,
+        .light-theme .education,
+        .light-theme .experience,
+        .light-theme .skills,
+        .light-theme .certificates {
+            background: rgba(255, 235, 238, 0.85);
+            color: #1a2a44;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .light-theme .hero h1 {
+            text-shadow: none;
+            color: #ad1457;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .light-theme .hero p {
+            color: #1a2a44;
+        }
+
+        .contact-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .light-theme .contact-links a {
+            color: #0288d1;
+        }
+
+        .contact-links a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        .content {
+            max-width: 800px;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .light-theme h2 {
+            color: #ad1457;
+            text-shadow: none;
+        }
+
+        .education-item, .experience-item, .certificate-item {
+            margin-bottom: 1.5rem;
+            color: #ecf0f1;
+        }
+
+        .light-theme .education-item,
+        .light-theme .experience-item,
+        .light-theme .certificate-item {
+            color: #1a2a44;
+        }
+
+        .skills-container {
+            padding: 1rem 0;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .skill {
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            flex: 0 0 auto;
+            background: #3498db;
+            color: white;
+        }
+
+        .light-theme .skill {
+            background: #ff5722;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #d84315;
+            box-shadow: 0 0 15px #ff5722, 0 0 30px #d84315;
+            cursor: pointer;
+        }
+
+        .education .content, .experience .content, .certificates .content {
+            min-height: 300px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .light-theme .education .content,
+        .light-theme .experience .content,
+        .light-theme .certificates .content {
+            background: rgba(255, 235, 238, 0.9);
+        }
+
+        .education .education-item, .experience .experience-item, .certificates .certificate-item {
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        .light-theme .education .education-item,
+        .light-theme .experience .experience-item,
+        .light-theme .certificates .certificate-item {
+            color: #1a2a44;
+        }
+
+        .skills .content {
+            background: transparent;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .skill {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .theme-toggle {
+                margin-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+            <li><a href="#education" onclick="scrollToSection('education')">Education</a></li>
+            <li><a href="#experience" onclick="scrollToSection('experience')">Experience</a></li>
+            <li><a href="#skills" onclick="scrollToSection('skills')">Skills</a></li>
+            <li><a href="#certificates" onclick="scrollToSection('certificates')">Certificates</a></li>
+        </ul>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <i class="sun-icon">☀️</i>
+            <i class="moon-icon">🌙</i>
+        </div>
+    </nav>
+
+    <section id="home" class="section hero">
+        <div class="content">
+            <h1>Banisethi Bhoomika</h1>
+            <p>BTech in Computer Science & Engineering (4th Year, KIIT Deemed to be University, Bhubaneswar) | AI/ML & Web Development Enthusiast</p>
+            <div class="contact-links">
+                <a href="mailto:banisethibhoomika@gmail.com">Email</a>
+                <a href="tel:+919348305287">Phone number</a>
+                <a href="https://www.linkedin.com/in/banisethi-bhoomika2004/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Banisethi-Bhoomika" target="_blank">GitHub</a>
+                <a href="https://leetcode.com/u/Banisethi_Bhoomika/" target="_blank">LeetCode</a>
+                <a href="https://www.geeksforgeeks.org/user/bhoomika2pjv/" target="_blank">GeeksforGeeks</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section education">
+        <div class="content">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Kalinga Institute of Industrial Technology</h3>
+                <p>Bachelor of Technology in Computer Science and Engineering</p>
+                <p>Bhubaneswar | 2022 - 2026</p>
+            </div>
+            <div class="education-item">
+                <h3>The Future Kid's Schools</h3>
+                <p>Indian School Certificate (12th)</p>
+                <p>Rajahmundry | 2021 - 2022</p>
+            </div>
+            <div class="education-item">
+                <h3>The Future Kid's School</h3>
+                <p>ICSE (10th)</p>
+                <p>Rajahmundry | 2019 - 2020</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section experience">
+        <div class="content">
+            <h2>Professional Experience</h2>
+            <div class="experience-item">
+                <h3>Web Development Intern</h3>
+                <p>ONGC | Rajahmundry, India | 04/2025 - 05/2025</p>
+                <p>Well Inventory Project - Andhra Pradesh, India</p>
+                <ul>
+                    <li>Developed a responsive web app using HTML, CSS, JavaScript, EJS, Bootstrap, Leaflet.js, and jsPDF for managing oil & gas well data.</li>
+                    <li>Implemented offline functionality with local JSON, GeoJSON, and offline map tiles.</li>
+                    <li>Designed a three-panel UI with well list, Leaflet map, and well details, featuring marker clustering and client-side filtering.</li>
+                    <li>Enabled PDF report generation and used http-server for offline fetch requests, ideal for remote field operations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section skills">
+        <div class="content">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill">Java</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">C</div>
+                    <div class="skill">MySQL</div>
+                    <div class="skill">HTML</div>
+                    <div class="skill">CSS</div>
+                    <div class="skill">Bootstrap</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">Data Structures</div>
+                    <div class="skill">Algorithms</div>
+                    <div class="skill">OOP</div>
+                    <div class="skill">DBMS</div>
+                    <div class="skill">OS</div>
+                    <div class="skill">Computer Networks</div>
+                    <div class="skill">Machine Learning</div>
+                    <div class="skill">Digital Marketing</div>
+                    <div class="skill">VS Code</div>
+                    <div class="skill">Git/GitHub</div>
+                    <div class="skill">MS Excel</div>
+                    <div class="skill">MS Word</div>
+                    <div class="skill">MS PowerPoint</div>
+                    <div class="skill">EJS</div>
+                    <div class="skill">Leaflet.js</div>
+                    <div class="skill">jsPDF</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="section certificates">
+        <div class="content">
+            <h2>Certificates</h2>
+            <div class="certificate-item">
+                <h3>UI/UX Cohort</h3>
+                <p>Successfully Completed UI/UX Design course Organized by FEDKIIT</p>
+            </div>
+            <div class="certificate-item">
+                <h3>AI/ML Cohort</h3>
+                <p>Successfully Completed AI/ML course Organized by FEDKIIT</p>
+            </div>
+            <div class="certificate-item">
+                <h3>Digital Marketing</h3>
+                <p>Successfully Completed Digital Marketing course Organized by FEDKIIT</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function scrollToSection(sectionId) {
+            event.preventDefault();
+            const section = document.getElementById(sectionId);
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            window.scrollTo({
+                top: section.offsetTop - navbarHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+            body.classList.toggle('light-theme');
+            navbar.classList.toggle('light-theme');
+            const isLightTheme = body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+        }
+
+        // Load theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.querySelector('.navbar').classList.add('light-theme');
+            }
+        });
+    </script>
+</body>
+</html>
